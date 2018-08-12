@@ -15,7 +15,7 @@ class CreateApplicationCarInfosTable extends Migration
     {
         Schema::create('application_car_infos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('mark');
+            $table->unsignedInteger('mark_id');
             $table->string('model');
             $table->year('release_year')->nullable();
             $table->float('mileage')->nullable();
