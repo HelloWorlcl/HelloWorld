@@ -27,7 +27,10 @@ class StoreUserRequest extends FormRequest
             'name' => 'required|max:30',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6',
-            'phone' => 'min:10|max:14'
+            'type' => 'required|in:customer,service',
+            'phone' => 'required|digits:12|unique:users',
+            'avatar' => 'image',
+            'description' => 'max:1020'
         ];
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddApplicationRespondedClientsFk extends Migration
+class AddApplicationRespondedServicesFk extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class AddApplicationRespondedClientsFk extends Migration
      */
     public function up()
     {
-        Schema::table('application_responded_clients', function (Blueprint $table) {
+        Schema::table('application_responded_services', function (Blueprint $table) {
             $table->foreign('application_id')
                 ->references('id')->on('applications')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->foreign('client_id')
-                ->references('id')->on('clients')
+            $table->foreign('service_id')
+                ->references('id')->on('users')
                 ->onDelete('cascade');
         });
     }
@@ -31,9 +31,9 @@ class AddApplicationRespondedClientsFk extends Migration
      */
     public function down()
     {
-        Schema::table('application_responded_clients', function (Blueprint $table) {
+        Schema::table('application_responded_services', function (Blueprint $table) {
             $table->dropForeign(['application_id']);
-            $table->dropForeign(['client_id']);
+            $table->dropForeign(['service_id']);
         });
     }
 }

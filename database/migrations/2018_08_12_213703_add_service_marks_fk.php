@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddClientCommentsFk extends Migration
+class AddServiceMarksFk extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class AddClientCommentsFk extends Migration
      */
     public function up()
     {
-        Schema::table('client_comments', function (Blueprint $table) {
-            $table->foreign('client_id')
-                ->references('id')->on('clients')
-                ->onDelete('cascade');
-            $table->foreign('user_id')
+        Schema::table('service_marks', function (Blueprint $table) {
+            $table->foreign('service_id')
                 ->references('id')->on('users')
                 ->onDelete('cascade');
+            $table->foreign('mark_id')->references('id')->on('car_marks');
         });
     }
 
@@ -30,9 +28,9 @@ class AddClientCommentsFk extends Migration
      */
     public function down()
     {
-        Schema::table('client_comments', function (Blueprint $table) {
-            $table->dropForeign(['client_id']);
-            $table->dropForeign(['user_id']);
+        Schema::table('service_marks', function (Blueprint $table) {
+            $table->dropForeign(['service_id']);
+            $table->dropForeign(['mark_id']);
         });
     }
 }

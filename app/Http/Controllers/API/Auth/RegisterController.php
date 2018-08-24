@@ -11,27 +11,18 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
-    public function userRegister(StoreUserRequest $request)
+    public function register(StoreUserRequest $request)
     {
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
+        $user->type = $request->type;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->avatar = $request->avatar;
+        $user->description = $request->description;
 
         $user->save();
-    }
-
-    public function clientRegister(StoreClientRequest $request)
-    {
-        $client = new Client();
-        $client->name = $request->name;
-        $client->email = $request->email;
-        $client->password = Hash::make($request->password);
-        $client->address = $request->address;
-        $client->phone = $request->phone;
-        $client->avatar = $request->avatar;
-        $client->description = $request->description;
-
-        $client->save();
     }
 }

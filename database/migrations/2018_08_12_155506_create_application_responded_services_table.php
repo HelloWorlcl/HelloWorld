@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateApplicationRespondedClientsTable extends Migration
+class CreateApplicationRespondedServicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateApplicationRespondedClientsTable extends Migration
      */
     public function up()
     {
-        Schema::create('application_responded_clients', function (Blueprint $table) {
+        Schema::create('application_responded_services', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('application_id');
-            $table->unsignedInteger('client_id');
+            $table->unsignedInteger('service_id');
             $table->date('start_time')->nullable();
             $table->integer('work_duration')->nullable();
             $table->float('bid')->nullable();
@@ -31,6 +31,6 @@ class CreateApplicationRespondedClientsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('application_responded_clients');
+        Schema::dropIfExists('application_responded_services');
     }
 }
