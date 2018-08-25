@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers\API\Auth;
 
-use App\Client;
-use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Controllers\Controller;
+use App\Transformers\UserTransformer;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
+    /**
+     * @param StoreUserRequest $request
+     *
+     * @return array
+     */
     public function register(StoreUserRequest $request)
     {
         $user = new User();
@@ -24,5 +28,10 @@ class RegisterController extends Controller
         $user->description = $request->description;
 
         $user->save();
+
+        return fractal()
+            ->item($user)
+            ->transformWith(new UserTransformer())
+            ->toArray();
     }
 }
